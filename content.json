@@ -1,0 +1,66 @@
+{
+  "site": {
+    "name": "Taia.ma Research",
+    "author": "Taiamã",
+    "email": "contato@taia.ma",
+    "twitter": "@seuhandle",
+    "twitter_url": "https://twitter.com/",
+    "linkedin": "linkedin.com/in/taiama",
+    "linkedin_url": "https://linkedin.com/in/",
+    "photo": ""
+  },
+
+  "reports": [
+    {
+      "title_pt": "Bitcoin e o Ciclo Macro Global — 2025",
+      "title_en": "Bitcoin and the Global Macro Cycle — 2025",
+      "desc_pt": "Análise do posicionamento do Bitcoin frente às políticas monetárias do Fed, BCE e tendências de desdolarização.",
+      "desc_en": "Analysis of Bitcoin's positioning against Fed, ECB monetary policies and de-dollarization trends.",
+      "date_pt": "Jan 2025",
+      "date_en": "Jan 2025",
+      "tag": "Macro",
+      "type": "PDF",
+      "link": "#",
+      "cover_image": ""
+    },
+    {
+      "title_pt": "Tokenomics: Guia de Avaliação de Protocolos DeFi",
+      "title_en": "Tokenomics: DeFi Protocol Evaluation Guide",
+      "desc_pt": "Framework proprietário para análise de estruturas de incentivo, emissão e governança em protocolos descentralizados.",
+      "desc_en": "Proprietary framework for analyzing incentive structures, emission, and governance in decentralized protocols.",
+      "date_pt": "Mar 2025",
+      "date_en": "Mar 2025",
+      "tag": "Tokenomics",
+      "type": "PDF",
+      "link": "#",
+      "cover_image": ""
+    }
+  ],
+
+  "publications": [
+    {
+      "source": "Exemplo de Veículo",
+      "title_pt": "Título do artigo ou entrevista publicada aqui",
+      "title_en": "Title of the article or interview published here",
+      "date_pt": "Fevereiro 2025",
+      "date_en": "February 2025",
+      "link": "#"
+    },
+    {
+      "source": "Outro Veículo",
+      "title_pt": "Segundo artigo — adicione o link real aqui",
+      "title_en": "Second article — add the real link here",
+      "date_pt": "Abril 2025",
+      "date_en": "April 2025",
+      "link": "#"
+    },
+    {
+      "source": "Veículo / Podcast / Newsletter",
+      "title_pt": "Terceira publicação — substitua pelo seu conteúdo real",
+      "title_en": "Third publication — replace with your real content",
+      "date_pt": "Junho 2025",
+      "date_en": "June 2025",
+      "link": "#"
+    }
+  ]
+}
