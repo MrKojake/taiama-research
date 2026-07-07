@@ -1,13 +1,14 @@
 {
   "site": {
     "name": "Taia.ma Research",
-    "author": "Taiamã",
-    "email": "contato@taia.ma",
-    "twitter": "@seuhandle",
-    "twitter_url": "https://twitter.com/",
-    "linkedin": "linkedin.com/in/taiama",
-    "linkedin_url": "https://linkedin.com/in/",
-    "photo": ""
+    "author": "Taiamã Demaman",
+    "email": "demama@taia.ma",
+    "location": "Florianópolis, SC — Brasil",
+    "livecoins_url": "https://livecoins.com.br/author/taiama/",
+    "crowdnews_url": "https://crowd.news/profile/651db76a023b9926677877c5",
+    "linkedin_url": "",
+    "calendly_url": "",
+    "photo": "taiama-photo.png"
   },
 
   "reports": [
@@ -39,28 +40,37 @@
 
   "publications": [
     {
-      "source": "Exemplo de Veículo",
-      "title_pt": "Título do artigo ou entrevista publicada aqui",
-      "title_en": "Title of the article or interview published here",
-      "date_pt": "Fevereiro 2025",
-      "date_en": "February 2025",
-      "link": "#"
+      "source": "Livecoins",
+      "title_pt": "Aposta bilionária em Bitcoin de Trump sinaliza maturidade do mercado",
+      "quote_pt": "Bitcoin deixa de ser ativo alternativo e passa a integrar estratégia financeira corporativa.",
+      "date": "Jul 2025",
+      "link": "https://livecoins.com.br/aposta-bilionaria-em-bitcoin-de-trump-sinaliza-maturidade-do-mercado/"
     },
     {
-      "source": "Outro Veículo",
-      "title_pt": "Segundo artigo — adicione o link real aqui",
-      "title_en": "Second article — add the real link here",
-      "date_pt": "Abril 2025",
-      "date_en": "April 2025",
-      "link": "#"
+      "source": "Livecoins",
+      "title_pt": "Liquidações pressionam mercado, mas BTC e ETH seguem com força estrutural",
+      "quote_pt": "Correção não apaga os fundamentos técnicos e macro que mantêm BTC e ETH no radar institucional.",
+      "date": "Ago 2025",
+      "link": "https://livecoins.com.br/liquidacoes-pressionam-mercado-mas-btc-e-eth-seguem-com-forca-estrutural/"
     },
     {
-      "source": "Veículo / Podcast / Newsletter",
-      "title_pt": "Terceira publicação — substitua pelo seu conteúdo real",
-      "title_en": "Third publication — replace with your real content",
-      "date_pt": "Junho 2025",
-      "date_en": "June 2025",
-      "link": "#"
+      "source": "Livecoins",
+      "title_pt": "Bitcoin abre espaço para altcoins em meio a cenário macro incerto",
+      "quote_pt": "Bitcoin renova máxima histórica abrindo espaço para o movimento das altcoins.",
+      "date": "Mai 2025",
+      "link": "https://livecoins.com.br/bitcoin-abre-espaco-para-altcoins-em-meio-a-cenario-macro-incerto/"
+    },
+    {
+      "source": "Livecoins",
+      "title_pt": "Bitcoin resiste à crise tarifária enquanto Ethereum repensa seu futuro",
+      "date": "2025",
+      "link": "https://livecoins.com.br/bitcoin-resiste-a-crise-tarifaria-enquanto-ethereum-repensa-seu-futuro/"
+    },
+    {
+      "source": "Livecoins",
+      "title_pt": "Arquivo completo de colunas",
+      "date": "Colunista",
+      "link": "https://livecoins.com.br/author/taiama/"
     }
   ]
 }
