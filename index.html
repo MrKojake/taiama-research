@@ -848,13 +848,10 @@
     }
 
     /* ── UTILS ── */
-    [data-lang] { display: none; }
-    .lang-pt [data-lang="pt"],
-    .lang-en [data-lang="en"] { display: block; }
-
-    span[data-lang] { display: none; }
-    .lang-pt span[data-lang="pt"],
-    .lang-en span[data-lang="en"] { display: inline; }
+    /* Esconde apenas o idioma inativo; o ativo mantém seu display natural
+       (flex, list-item, inline...), evitando quebra de layout. */
+    .lang-pt [data-lang="en"],
+    .lang-en [data-lang="pt"] { display: none !important; }
 
     .divider {
       width: 48px; height: 3px;
@@ -976,7 +973,8 @@
         <img src="taiama-photo.png" alt="Taiamã Demaman" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
       </div>
       <div class="about-badge">
-        <div class="about-badge-title">Economista</div>
+        <div class="about-badge-title" data-lang="pt">Economista</div>
+        <div class="about-badge-title" data-lang="en">Economist</div>
         <div class="about-badge-text" data-lang="pt">Ativos Digitais & Macro</div>
         <div class="about-badge-text" data-lang="en">Digital Assets & Macro</div>
       </div>
@@ -1294,11 +1292,11 @@
         <div class="form-group">
           <label for="nome" data-lang="pt">Nome</label>
           <label for="nome" data-lang="en">Name</label>
-          <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" data-ph-pt="Seu nome" data-ph-en="Your name" required />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+          <input type="email" id="email" name="email" placeholder="seu@email.com" data-ph-pt="seu@email.com" data-ph-en="your@email.com" required />
         </div>
       </div>
 
@@ -1306,23 +1304,18 @@
         <label for="tipo" data-lang="pt">Tipo de consulta</label>
         <label for="tipo" data-lang="en">Inquiry type</label>
         <select id="tipo" name="tipo">
-          <option value="" data-lang="pt">Selecione...</option>
-          <option value="" data-lang="en">Select...</option>
-          <option value="individual" data-lang="pt">Consultoria Individual</option>
-          <option value="individual" data-lang="en">Individual Consulting</option>
-          <option value="corporate" data-lang="pt">Consultoria Corporativa</option>
-          <option value="corporate" data-lang="en">Corporate Consulting</option>
-          <option value="report" data-lang="pt">Relatório Customizado</option>
-          <option value="report" data-lang="en">Custom Report</option>
-          <option value="other" data-lang="pt">Outro</option>
-          <option value="other" data-lang="en">Other</option>
+          <option value="" data-pt="Selecione..." data-en="Select...">Selecione...</option>
+          <option value="individual" data-pt="Consultoria Individual" data-en="Individual Consulting">Consultoria Individual</option>
+          <option value="corporate" data-pt="Consultoria Corporativa" data-en="Corporate Consulting">Consultoria Corporativa</option>
+          <option value="report" data-pt="Relatório Customizado" data-en="Custom Report">Relatório Customizado</option>
+          <option value="other" data-pt="Outro" data-en="Other">Outro</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="msg" data-lang="pt">Mensagem</label>
         <label for="msg" data-lang="en">Message</label>
-        <textarea id="msg" name="msg" placeholder="Descreva brevemente o que você precisa..." required></textarea>
+        <textarea id="msg" name="msg" placeholder="Descreva brevemente o que você precisa..." data-ph-pt="Descreva brevemente o que você precisa..." data-ph-en="Briefly describe what you need..." required></textarea>
       </div>
 
       <button type="submit" class="btn-submit">
@@ -1352,6 +1345,16 @@
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+    // <option> não pode ser escondido por CSS de forma confiável — troca o texto.
+    document.querySelectorAll('option[data-pt]').forEach(o => {
+      o.textContent = lang === 'pt' ? o.dataset.pt : o.dataset.en;
+    });
+
+    // Placeholders não são afetados por CSS — troca o atributo.
+    document.querySelectorAll('[data-ph-pt]').forEach(el => {
+      el.placeholder = lang === 'pt' ? el.dataset.phPt : el.dataset.phEn;
+    });
   }
 
   function toggleMenu() {
