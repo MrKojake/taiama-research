@@ -537,6 +537,23 @@
       opacity: 0.15;
     }
 
+    .report-year {
+      font-family: var(--font-serif);
+      font-size: 3.25rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .report-pages {
+      position: absolute;
+      bottom: 12px; right: 14px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+    }
+
     .report-type-badge {
       position: absolute;
       top: 12px; left: 12px;
@@ -1126,43 +1143,65 @@
 
   <div class="research-grid">
 
-    <!-- EXEMPLO 1: relatório com imagem de capa -->
-    <a href="#" class="report-card" target="_blank" rel="noopener">
+    <a href="relatorios/tendencias-2026-coinext.pdf" class="report-card" target="_blank" rel="noopener">
       <div class="report-thumb">
-        <!-- <img src="relatorio-1-capa.jpg" alt="Capa do relatório" /> -->
-        <span class="report-thumb-placeholder">📄</span>
+        <span class="report-year">2026</span>
         <span class="report-type-badge">PDF</span>
+        <span class="report-pages" data-lang="pt">64 páginas</span>
+        <span class="report-pages" data-lang="en">64 pages</span>
       </div>
       <div class="report-body">
-        <div class="report-date" data-lang="pt">Jan 2025</div>
-        <div class="report-date" data-lang="en">Jan 2025</div>
-        <div class="report-title" data-lang="pt">Bitcoin e o Ciclo Macro Global — 2025</div>
-        <div class="report-title" data-lang="en">Bitcoin and the Global Macro Cycle — 2025</div>
-        <div class="report-desc" data-lang="pt">Análise do posicionamento do Bitcoin frente às políticas monetárias do Fed, BCE e tendências de desdolarização.</div>
-        <div class="report-desc" data-lang="en">Analysis of Bitcoin's positioning against Fed, ECB monetary policies and de-dollarization trends.</div>
+        <div class="report-date">Coinext · 2026</div>
+        <div class="report-title" data-lang="pt">Tendências 2026 — Criptoativos: da hipótese à infraestrutura</div>
+        <div class="report-title" data-lang="en">Trends 2026 — Cryptoassets: from hypothesis to infrastructure</div>
+        <div class="report-desc" data-lang="pt">Retrospectiva de 2025 e perspectivas para 2026: reservas estratégicas, regulação, stablecoins, inteligência artificial e infraestrutura descentralizada.</div>
+        <div class="report-desc" data-lang="en">2025 in review and the outlook for 2026: strategic reserves, regulation, stablecoins, artificial intelligence and decentralized infrastructure.</div>
       </div>
       <div class="report-footer">
-        <span class="report-tag">Macro</span>
+        <span class="report-tag" data-lang="pt">Relatório anual</span>
+        <span class="report-tag" data-lang="en">Annual report</span>
         <span class="report-link-icon">↗</span>
       </div>
     </a>
 
-    <!-- EXEMPLO 2 -->
-    <a href="#" class="report-card" target="_blank" rel="noopener">
+    <a href="relatorios/tendencias-2025-coinext.pdf" class="report-card" target="_blank" rel="noopener">
       <div class="report-thumb">
-        <span class="report-thumb-placeholder">📊</span>
+        <span class="report-year">2025</span>
         <span class="report-type-badge">PDF</span>
+        <span class="report-pages" data-lang="pt">70 páginas</span>
+        <span class="report-pages" data-lang="en">70 pages</span>
       </div>
       <div class="report-body">
-        <div class="report-date" data-lang="pt">Mar 2025</div>
-        <div class="report-date" data-lang="en">Mar 2025</div>
-        <div class="report-title" data-lang="pt">Tokenomics: Guia de Avaliação de Protocolos DeFi</div>
-        <div class="report-title" data-lang="en">Tokenomics: DeFi Protocol Evaluation Guide</div>
-        <div class="report-desc" data-lang="pt">Framework proprietário para análise de estruturas de incentivo, emissão e governança em protocolos descentralizados.</div>
-        <div class="report-desc" data-lang="en">Proprietary framework for analyzing incentive structures, emission, and governance in decentralized protocols.</div>
+        <div class="report-date">Coinext · 2025</div>
+        <div class="report-title" data-lang="pt">Tendências 2025 — Descentralização: o caminho para um futuro antifrágil</div>
+        <div class="report-title" data-lang="en">Trends 2025 — Decentralization: the path to an antifragile future</div>
+        <div class="report-desc" data-lang="pt">Retrospectiva de 2024 e perspectivas para 2025: efeito Trump, cenário macroeconômico, Bitcoin e altcoins, stablecoins e regulação global.</div>
+        <div class="report-desc" data-lang="en">2024 in review and the outlook for 2025: the Trump effect, macroeconomic scenario, Bitcoin and altcoins, stablecoins and global regulation.</div>
       </div>
       <div class="report-footer">
-        <span class="report-tag">Tokenomics</span>
+        <span class="report-tag" data-lang="pt">Relatório anual</span>
+        <span class="report-tag" data-lang="en">Annual report</span>
+        <span class="report-link-icon">↗</span>
+      </div>
+    </a>
+
+    <a href="relatorios/tendencias-2024-coinext.pdf" class="report-card" target="_blank" rel="noopener">
+      <div class="report-thumb">
+        <span class="report-year">2024</span>
+        <span class="report-type-badge">PDF</span>
+        <span class="report-pages" data-lang="pt">46 páginas</span>
+        <span class="report-pages" data-lang="en">46 pages</span>
+      </div>
+      <div class="report-body">
+        <div class="report-date">Coinext · 2024</div>
+        <div class="report-title" data-lang="pt">Tendências 2024 — Blockchain e sua última fronteira de inovação</div>
+        <div class="report-title" data-lang="en">Trends 2024 — Blockchain and its last frontier of innovation</div>
+        <div class="report-desc" data-lang="pt">Retrospectiva de 2023 e perspectivas para 2024: halving do Bitcoin, análise on-chain, cenário macroeconômico e adoção de cripto no Brasil.</div>
+        <div class="report-desc" data-lang="en">2023 in review and the outlook for 2024: Bitcoin halving, on-chain analysis, macroeconomic scenario and crypto adoption in Brazil.</div>
+      </div>
+      <div class="report-footer">
+        <span class="report-tag" data-lang="pt">Relatório anual</span>
+        <span class="report-tag" data-lang="en">Annual report</span>
         <span class="report-link-icon">↗</span>
       </div>
     </a>
@@ -1276,6 +1315,13 @@
           <div class="contact-item-text">
             <div class="contact-item-label">Email</div>
             <a href="mailto:demaman@taia.ma">demaman@taia.ma</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✆</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">WhatsApp</div>
+            <a href="https://wa.me/5548991223979" target="_blank" rel="noopener">+55 (48) 99122-3979</a>
           </div>
         </div>
         <div class="contact-item">
