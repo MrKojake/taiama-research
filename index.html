@@ -3,8 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Taia.ma Research</title>
-  <meta name="description" content="Consultoria especializada em ativos digitais, macroeconomia, tokenomics e investimentos." />
+  <title>Taia.ma Research — Inteligência econômica em ativos digitais</title>
+  <meta name="description" content="Consultoria especializada em ativos digitais, macroeconomia, tokenomics e investimentos. Por Taiamã Demaman, economista." />
+  <link rel="canonical" href="https://taia.ma/" />
+
+  <!-- Preview ao compartilhar o link (LinkedIn, WhatsApp, X) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://taia.ma/" />
+  <meta property="og:site_name" content="Taia.ma Research" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Taia.ma Research — Inteligência econômica em ativos digitais" />
+  <meta property="og:description" content="Consultoria especializada para investidores e empresas posicionadas em mercados emergentes e web3." />
+  <meta property="og:image" content="https://taia.ma/taiama-photo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taia.ma Research — Inteligência econômica em ativos digitais" />
+  <meta name="twitter:description" content="Consultoria especializada para investidores e empresas posicionadas em mercados emergentes e web3." />
+  <meta name="twitter:image" content="https://taia.ma/taiama-photo.png" />
+
+  <!-- Favicon: "T" em serifa sobre o azul da marca -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A1628'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' fill='%23fff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
@@ -913,7 +931,7 @@
 
     <h1 class="hero-title">
       <span data-lang="pt">Inteligência econômica em <em>ativos digitais</em>, tokenomics e macro.</span>
-      <span data-lang="en">Economic Intelligence in <em>Digital Assets</em>, Tokenomics and Macroeconomics.</span>
+      <span data-lang="en">Economic intelligence in <em>digital assets</em>, tokenomics and macro.</span>
     </h1>
 
     <p class="hero-desc">
@@ -1149,14 +1167,6 @@
       </div>
     </a>
 
-    <!-- PLACEHOLDER PARA ADICIONAR MAIS -->
-    <div class="add-report-hint">
-      <strong data-lang="pt">+ Adicionar relatório</strong>
-      <strong data-lang="en">+ Add report</strong>
-      <span data-lang="pt">Coloque aqui o link para seu PDF ou imagem de capa</span>
-      <span data-lang="en">Add your PDF link or cover image here</span>
-    </div>
-
   </div>
 </section>
 
@@ -1287,7 +1297,9 @@
       </div>
     </div>
 
-    <form onsubmit="submitForm(event)">
+    <form name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitForm(event)">
+      <input type="hidden" name="form-name" value="contato" />
+      <p hidden><label>Não preencha: <input name="bot-field" /></label></p>
       <div class="form-row">
         <div class="form-group">
           <label for="nome" data-lang="pt">Nome</label>
@@ -1331,8 +1343,8 @@
 <footer>
   <div class="footer-logo">Taia.ma Research</div>
   <div>
-    <span data-lang="pt">© 2025 Taiamã. Todos os direitos reservados.</span>
-    <span data-lang="en">© 2025 Taiamã. All rights reserved.</span>
+    <span data-lang="pt">© 2026 Taiamã Demaman. Todos os direitos reservados.</span>
+    <span data-lang="en">© 2026 Taiamã Demaman. All rights reserved.</span>
   </div>
   <a href="#hero" data-lang="pt">Voltar ao topo ↑</a>
   <a href="#hero" data-lang="en">Back to top ↑</a>
@@ -1364,19 +1376,38 @@
     links.style.cssText = isOpen ? '' : 'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;padding:1rem 5vw 2rem;border-bottom:1px solid #E5E7EB;gap:1rem;z-index:99;';
   }
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
     const lang = document.body.classList.contains('lang-en') ? 'en' : 'pt';
-    btn.textContent = lang === 'pt' ? 'Mensagem enviada ✓' : 'Message sent ✓';
-    btn.style.background = '#16A34A';
+    const original = btn.innerHTML;
+
+    btn.disabled = true;
+    btn.textContent = lang === 'pt' ? 'Enviando...' : 'Sending...';
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+      if (!res.ok) throw new Error(res.status);
+      btn.textContent = lang === 'pt' ? 'Mensagem enviada ✓' : 'Message sent ✓';
+      btn.style.background = '#16A34A';
+      form.reset();
+    } catch (err) {
+      btn.textContent = lang === 'pt'
+        ? 'Erro ao enviar — escreva para site@taia.ma'
+        : 'Sending failed — email site@taia.ma';
+      btn.style.background = '#DC2626';
+    }
+
     setTimeout(() => {
-      btn.innerHTML = lang === 'pt'
-        ? '<span data-lang="pt">Enviar mensagem</span><span data-lang="en">Send message</span>'
-        : '<span data-lang="pt">Enviar mensagem</span><span data-lang="en">Send message</span>';
+      btn.innerHTML = original;
       btn.style.background = '';
-      e.target.reset();
-    }, 3000);
+      btn.disabled = false;
+    }, 5000);
   }
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
