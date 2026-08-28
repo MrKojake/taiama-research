@@ -530,20 +530,12 @@
     .report-thumb img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: top center;
     }
 
     .report-thumb-placeholder {
       font-size: 2.5rem;
       opacity: 0.15;
-    }
-
-    .report-year {
-      font-family: var(--font-serif);
-      font-size: 3.25rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.92);
-      letter-spacing: 0.02em;
-      line-height: 1;
     }
 
     .report-pages {
@@ -621,7 +613,7 @@
       flex-direction: row;
       gap: 1.25rem;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-behavior: auto;
       padding: 0.5rem 5vw 1.5rem;
       margin: 0 -5vw;
       scrollbar-width: thin;
@@ -645,7 +637,6 @@
       background: var(--white);
       text-decoration: none;
       color: inherit;
-      scroll-snap-align: start;
       transition: border-color 0.15s, transform 0.15s;
     }
 
@@ -696,6 +687,58 @@
       right: 1.25rem;
       color: var(--text-muted);
       font-size: 1.125rem;
+    }
+
+    /* logo do veículo */
+    .pub-head {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-bottom: 0.75rem;
+    }
+    .pub-head .pub-source { margin-bottom: 0; }
+    .pub-logo {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .pub-logo img { width: 20px; height: 20px; object-fit: contain; display: block; }
+
+    /* carrossel auto-scroll */
+    .pub-carousel { position: relative; }
+    .pub-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--navy);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(10,22,40,0.10);
+      transition: border-color 0.15s, color 0.15s, transform 0.15s;
+    }
+    .pub-nav:hover { border-color: var(--accent); color: var(--accent); }
+    .pub-nav:active { transform: translateY(-50%) scale(0.94); }
+    .pub-nav-left { left: -6px; }
+    .pub-nav-right { right: -6px; }
+    @media (max-width: 640px) {
+      .pub-nav { width: 38px; height: 38px; font-size: 1.25rem; }
     }
 
     /* ── CONTACT ── */
@@ -1149,7 +1192,7 @@
 
     <a href="relatorios/tendencias-2026-coinext.pdf" class="report-card" target="_blank" rel="noopener">
       <div class="report-thumb">
-        <span class="report-year">2026</span>
+        <img src="relatorios/thumbs/tendencias-2026.jpg" alt="" loading="lazy">
         <span class="report-type-badge">PDF</span>
         <span class="report-pages" data-lang="pt">64 páginas</span>
         <span class="report-pages" data-lang="en">64 pages</span>
@@ -1170,7 +1213,7 @@
 
     <a href="relatorios/tendencias-2025-coinext.pdf" class="report-card" target="_blank" rel="noopener">
       <div class="report-thumb">
-        <span class="report-year">2025</span>
+        <img src="relatorios/thumbs/tendencias-2025.jpg" alt="" loading="lazy">
         <span class="report-type-badge">PDF</span>
         <span class="report-pages" data-lang="pt">70 páginas</span>
         <span class="report-pages" data-lang="en">70 pages</span>
@@ -1191,7 +1234,7 @@
 
     <a href="relatorios/tendencias-2024-coinext.pdf" class="report-card" target="_blank" rel="noopener">
       <div class="report-thumb">
-        <span class="report-year">2024</span>
+        <img src="relatorios/thumbs/tendencias-2024.jpg" alt="" loading="lazy">
         <span class="report-type-badge">PDF</span>
         <span class="report-pages" data-lang="pt">46 páginas</span>
         <span class="report-pages" data-lang="en">46 pages</span>
@@ -1206,6 +1249,47 @@
       <div class="report-footer">
         <span class="report-tag" data-lang="pt">Relatório anual</span>
         <span class="report-tag" data-lang="en">Annual report</span>
+        <span class="report-link-icon">↗</span>
+      </div>
+    </a>
+
+    <a href="relatorios/eth-etf-taiama-demaman.pdf" class="report-card" target="_blank" rel="noopener">
+      <div class="report-thumb">
+        <img src="relatorios/thumbs/eth-etf.jpg" alt="" loading="lazy">
+        <span class="report-type-badge">PDF</span>
+        <span class="report-pages" data-lang="pt">22 páginas</span>
+        <span class="report-pages" data-lang="en">22 pages</span>
+      </div>
+      <div class="report-body">
+        <div class="report-date" data-lang="pt">Coinext · Relatório especial</div>
+        <div class="report-date" data-lang="en">Coinext · Special report</div>
+        <div class="report-title" data-lang="pt">Relatório Especial: O futuro da Ethereum (ETH)</div>
+        <div class="report-title" data-lang="en">Special Report: The future of Ethereum (ETH)</div>
+        <div class="report-desc" data-lang="pt">O que é a Ethereum, a transição de PoW para PoS, o funcionamento dos ETFs, os principais ETFs de Ethereum, riscos, previsão de fluxos e análise técnica do ativo.</div>
+        <div class="report-desc" data-lang="en">What Ethereum is, the PoW-to-PoS transition, how ETFs work, the main Ethereum ETFs, risks, inflow projections and technical analysis of the asset.</div>
+      </div>
+      <div class="report-footer">
+        <span class="report-tag" data-lang="pt">Relatório especial</span>
+        <span class="report-tag" data-lang="en">Special report</span>
+        <span class="report-link-icon">↗</span>
+      </div>
+    </a>
+
+    <a href="https://deepdive.honeyisland.app/reports/bitcoin-computacao-quantica.html?s=961cb523-fc98-42e1-9a47-7ab4fb570477" class="report-card" target="_blank" rel="noopener">
+      <div class="report-thumb">
+        <img src="relatorios/thumbs/honey-island-quantum.svg" alt="" loading="lazy">
+        <span class="report-type-badge">WEB</span>
+      </div>
+      <div class="report-body">
+        <div class="report-date">Honey Island · Ago 2026</div>
+        <div class="report-title" data-lang="pt">Bitcoin e o Risco da Computação Quântica</div>
+        <div class="report-title" data-lang="en">Bitcoin and the Risk of Quantum Computing</div>
+        <div class="report-desc" data-lang="pt">Relatório da Honey Island sobre a ameaça da computação quântica à criptografia do Bitcoin e os cenários de mitigação.</div>
+        <div class="report-desc" data-lang="en">Honey Island report on the threat quantum computing poses to Bitcoin's cryptography and the paths to mitigation.</div>
+      </div>
+      <div class="report-footer">
+        <span class="report-tag" data-lang="pt">Relatório externo</span>
+        <span class="report-tag" data-lang="en">External report</span>
         <span class="report-link-icon">↗</span>
       </div>
     </a>
@@ -1232,6 +1316,9 @@
     </p>
   </div>
 
+  <div class="pub-carousel">
+    <button class="pub-nav pub-nav-left" type="button" aria-label="Anterior" onclick="pubScroll(-1)">‹</button>
+    <button class="pub-nav pub-nav-right" type="button" aria-label="Próximo" onclick="pubScroll(1)">›</button>
   <div class="pub-list">
 
     <a href="https://forbes.com.br/escolhas-do-editor/2025/01/entenda-o-que-sao-e-como-funcionam-as-meme-coins/" class="pub-item" target="_blank" rel="noopener">
@@ -1277,6 +1364,9 @@
         <div class="pub-source">Portal do Bitcoin</div>
         <div class="pub-title" data-lang="pt">Bitcoin já atingiu o fundo e é hora de comprar? Analistas respondem</div>
         <div class="pub-title" data-lang="en">Has Bitcoin bottomed and is it time to buy? Analysts answer</div>
+        <div class="pub-quote" data-lang="pt">"Para Taiamã Demaman, o próximo suporte realmente relevante aparece em torno de US$ 55 mil, que poderia marcar o fundo desse ciclo de baixa."</div>
+        <div class="pub-quote" data-lang="en">"For Taiamã Demaman, the next truly relevant support appears around US$55,000, which could mark the bottom of this bear cycle."</div>
+        <div class="pub-date">Fev 2026</div>
       </div>
       <div class="pub-arrow">↗</div>
     </a>
@@ -1336,6 +1426,92 @@
       <div class="pub-arrow">↗</div>
     </a>
 
+    <a href="https://coinext.com.br/blog/melhores-criptomoedas-fevereiro" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Melhores criptomoedas para fevereiro de 2026</div>
+        <div class="pub-title" data-lang="en">Best cryptocurrencies for February 2026</div>
+        <div class="pub-date">Fev 2026</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/previsao-para-sui" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Previsão para SUI</div>
+        <div class="pub-title" data-lang="en">SUI price prediction</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/previsao-para-ethena" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Previsão para Ethena (ENA)</div>
+        <div class="pub-title" data-lang="en">Ethena (ENA) price prediction</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/previsao-para-hyperliquid" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Previsão para Hyperliquid (HYPE)</div>
+        <div class="pub-title" data-lang="en">Hyperliquid (HYPE) price prediction</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/previsao-para-aster" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Previsão para Aster (ASTER)</div>
+        <div class="pub-title" data-lang="en">Aster (ASTER) price prediction</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/melhores-criptomoedas-julho" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Melhores criptomoedas para julho de 2025</div>
+        <div class="pub-title" data-lang="en">Best cryptocurrencies for July 2025</div>
+        <div class="pub-date">Jul 2025</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/melhores-criptomoedas-junho" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Melhores criptomoedas para junho de 2025</div>
+        <div class="pub-title" data-lang="en">Best cryptocurrencies for June 2025</div>
+        <div class="pub-date">Jun 2025</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/melhores-criptomoedas-maio" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Melhores criptomoedas para maio de 2025</div>
+        <div class="pub-title" data-lang="en">Best cryptocurrencies for May 2025</div>
+        <div class="pub-date">Mai 2025</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a href="https://coinext.com.br/blog/melhores-criptomoedas-abril" class="pub-item" target="_blank" rel="noopener">
+      <div class="pub-content">
+        <div class="pub-source">Coinext</div>
+        <div class="pub-title" data-lang="pt">Melhores criptomoedas para abril de 2025</div>
+        <div class="pub-title" data-lang="en">Best cryptocurrencies for April 2025</div>
+        <div class="pub-date">Abr 2025</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
     <a href="https://livecoins.com.br/author/taiama/" class="pub-item" target="_blank" rel="noopener">
       <div class="pub-content">
         <div class="pub-source">Livecoins</div>
@@ -1347,6 +1523,7 @@
       <div class="pub-arrow">↗</div>
     </a>
 
+  </div>
   </div>
 </section>
 
@@ -1529,6 +1706,73 @@
       if (links && window.innerWidth < 900) links.style.cssText = '';
     });
   });
+
+  /* ── Publicações: logo do veículo + carrossel automático ── */
+  (function () {
+    const list = document.querySelector('.pub-list');
+    if (!list) return;
+
+    // Alguns artigos ficam hospedados noutro domínio — força o favicon do veículo certo.
+    const domainOverride = { 'br.tradingview.com': 'cointelegraph.com' };
+
+    list.querySelectorAll('.pub-item').forEach(item => {
+      let host;
+      try { host = new URL(item.href).hostname.replace(/^www\./, ''); } catch (e) { return; }
+      const domain = domainOverride[host] || host;
+
+      const source = item.querySelector('.pub-source');
+      const content = item.querySelector('.pub-content');
+      if (!source || !content) return;
+
+      const badge = document.createElement('span');
+      badge.className = 'pub-logo';
+      const img = document.createElement('img');
+      img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + domain;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.onerror = () => badge.remove();
+      badge.appendChild(img);
+
+      const head = document.createElement('div');
+      head.className = 'pub-head';
+      head.appendChild(badge);
+      head.appendChild(source);            // move a fonte para junto do logo
+      content.insertBefore(head, content.firstChild);
+    });
+
+    // Duplica os itens para um loop contínuo sem emendas.
+    Array.from(list.children).forEach(node => list.appendChild(node.cloneNode(true)));
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let paused = false;
+    const SPEED = 0.5; // px por frame — ~30px/s
+
+    const carousel = document.querySelector('.pub-carousel');
+    carousel.addEventListener('mouseenter', () => paused = true);
+    carousel.addEventListener('mouseleave', () => paused = false);
+    carousel.addEventListener('focusin', () => paused = true);
+    carousel.addEventListener('focusout', () => paused = false);
+    // Enquanto o dedo/arrasto está ativo, não empurra.
+    list.addEventListener('touchstart', () => paused = true, { passive: true });
+    list.addEventListener('touchend', () => paused = false);
+
+    // Setas: avança/volta uma "página" de forma suave.
+    window.pubScroll = function (dir) {
+      list.scrollBy({ left: dir * (list.clientWidth * 0.8), behavior: 'smooth' });
+    };
+
+    if (!reduce) {
+      (function step() {
+        if (!paused) {
+          list.scrollLeft += SPEED;
+          const half = list.scrollWidth / 2;
+          if (list.scrollLeft >= half) list.scrollLeft -= half;
+          else if (list.scrollLeft <= 0) list.scrollLeft += half;
+        }
+        requestAnimationFrame(step);
+      })();
+    }
+  })();
 </script>
 
 </body>
