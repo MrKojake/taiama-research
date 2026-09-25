@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Taia.ma Research — Inteligência econômica em ativos digitais</title>
-  <meta name="description" content="Consultoria especializada em ativos digitais, macroeconomia, tokenomics e investimentos. Por Taiamã Demaman, economista." />
+  <title>Taia.ma Research — Economic intelligence in digital assets</title>
+  <meta name="description" content="Specialized consulting in digital assets, macroeconomics, tokenomics and investments. By Taiamã Demaman, economist." />
   <link rel="canonical" href="https://taia.ma/" />
 
   <!-- Preview ao compartilhar o link (LinkedIn, WhatsApp, X) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://taia.ma/" />
   <meta property="og:site_name" content="Taia.ma Research" />
-  <meta property="og:locale" content="pt_BR" />
-  <meta property="og:title" content="Taia.ma Research — Inteligência econômica em ativos digitais" />
-  <meta property="og:description" content="Consultoria especializada para investidores e empresas posicionadas em mercados emergentes e web3." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:title" content="Taia.ma Research — Economic intelligence in digital assets" />
+  <meta property="og:description" content="Specialized consulting for investors and companies positioned in emerging markets and web3." />
   <meta property="og:image" content="https://taia.ma/taiama-photo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Taia.ma Research — Inteligência econômica em ativos digitais" />
-  <meta name="twitter:description" content="Consultoria especializada para investidores e empresas posicionadas em mercados emergentes e web3." />
+  <meta name="twitter:title" content="Taia.ma Research — Economic intelligence in digital assets" />
+  <meta name="twitter:description" content="Specialized consulting for investors and companies positioned in emerging markets and web3." />
   <meta name="twitter:image" content="https://taia.ma/taiama-photo.png" />
 
   <!-- Favicon: "T" em serifa sobre o azul da marca -->
@@ -962,7 +963,7 @@
     }
   </style>
 </head>
-<body class="lang-pt">
+<body class="lang-en">
 
 <!-- NAV -->
 <nav>
@@ -978,8 +979,8 @@
 
   <div class="nav-right">
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1673,6 +1674,8 @@
       el.placeholder = lang === 'pt' ? el.dataset.phPt : el.dataset.phEn;
     });
   }
+
+  setLang('en');
 
   function toggleMenu() {
     const links = document.querySelector('.nav-links');
