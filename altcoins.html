@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altcoins — Taia.ma Research</title>
+  <meta name="description" content="Altcoin research archive by Taiamã Demaman, economist: projects analyzed and rated 1–5, featured write-ups and the method behind them." />
+  <link rel="canonical" href="https://taia.ma/altcoins" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://taia.ma/altcoins" />
+  <meta property="og:site_name" content="Taia.ma Research" />
+  <meta property="og:title" content="Altcoins — Taia.ma Research" />
+  <meta property="og:description" content="Altcoin research archive 2023–2025: projects analyzed and rated, and the method behind them." />
+  <meta property="og:image" content="https://taia.ma/taiama-photo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A1628'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' fill='%23fff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+
+  <!-- Tema: aplica antes de renderizar (escolha salva > preferência do sistema), igual a taia.ma -->
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Mesma paleta de taia.ma (tema claro) */
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #122040;
+      --accent: #2563EB;
+      --accent-light: #EFF6FF;
+      --gold: #B8973A;
+      --heading: #0A1628;
+      --text: #0A1628;
+      --text-secondary: #4B5563;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --surface: #F9FAFB;
+      --bg: #FFFFFF;
+      --card: #FFFFFF;
+      --nav-bg: rgba(255,255,255,0.96);
+      --chip-bg: #EFF6FF;
+      --chip-text: #1E40AF;
+      --radius: 8px;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      color-scheme: light;
+    }
+
+    /* Tema escuro: mesmas cores do tema escuro de taia.ma */
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --accent: #3B82F6;
+      --accent-light: rgba(59,130,246,0.14);
+      --gold: #D4B45A;
+      --heading: #E5E7EB;
+      --text: #E5E7EB;
+      --text-secondary: #A3ADBD;
+      --text-muted: #8391A7;
+      --border: #22324F;
+      --surface: #0D1A2F;
+      --bg: #08111F;
+      --card: #10203A;
+      --nav-bg: rgba(8,17,31,0.92);
+      --chip-bg: rgba(59,130,246,0.18);
+      --chip-text: #BFDBFE;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--heading);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--heading); }
+    .nav-links a.active { color: var(--heading); box-shadow: inset 0 -2px 0 var(--gold); padding-bottom: 4px; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+    .lang-toggle {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px;
+    }
+    .lang-btn {
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 16px; border: none; cursor: pointer;
+      background: transparent; color: var(--text-muted);
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+    .lang-btn.active { background: var(--navy); color: #fff; }
+    [data-theme="dark"] .lang-btn.active { background: var(--accent); }
+
+    /* Botão de tema (igual a taia.ma) */
+    .theme-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .theme-btn .icon-sun { display: none; }
+    [data-theme="dark"] .theme-btn .icon-sun { display: inline; }
+    [data-theme="dark"] .theme-btn .icon-moon { display: none; }
+
+    .hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      padding: 4px;
+      flex-direction: column; gap: 5px;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--heading); border-radius: 2px; }
+
+    /* ── HEADER (mesmo degradê do hero de taia.ma) ── */
+    .page-hero {
+      padding: 136px 5vw 72px;
+      background: linear-gradient(160deg, #0A1628 0%, #122040 60%, #1E3A6E 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(37,99,235,0.08);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 1100px; position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #D4B45A;
+      margin-bottom: 1.25rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,180,90,0.6); }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      max-width: 760px;
+    }
+    .hero-title em { font-style: normal; color: #93C5FD; }
+    .hero-desc { font-size: 1.0625rem; color: rgba(255,255,255,0.68); line-height: 1.7; max-width: 620px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 2.5rem; margin-top: 2.5rem; }
+    .stat-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; color: #fff; line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); letter-spacing: 0.05em; margin-top: 6px; }
+
+    /* ── SEÇÕES ── */
+    section { padding: 88px 5vw; }
+    section.alt { background: var(--surface); }
+    .wrap { max-width: 1100px; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .divider { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 1.5rem; }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 600;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-desc { font-size: 1.0625rem; color: var(--text-secondary); max-width: 620px; line-height: 1.7; }
+    .section-header { margin-bottom: 3rem; }
+
+    /* ── ANÁLISES EM DESTAQUE (estilo dos cards de "Na mídia") ── */
+    .feat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+    .feat-item {
+      position: relative;
+      display: flex; flex-direction: column;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .feat-item:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .feat-head { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 0.75rem; }
+    .chip {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--chip-bg);
+      color: var(--chip-text);
+      letter-spacing: 0.02em;
+    }
+    .feat-source { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+    .feat-title { font-size: 1rem; font-weight: 500; color: var(--heading); line-height: 1.4; margin-bottom: 0.5rem; padding-right: 1.25rem; }
+    .feat-excerpt { font-size: 0.875rem; line-height: 1.55; color: var(--text-secondary); flex: 1; }
+    .feat-date { font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.875rem; }
+    .feat-arrow { position: absolute; top: 1.25rem; right: 1.25rem; color: var(--text-muted); font-size: 1.125rem; }
+
+    /* ── SCORECARDS ── */
+    .tools { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1rem; }
+    .search {
+      flex: 1 1 260px;
+      font: inherit; font-size: 0.9375rem;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--text);
+    }
+    .search::placeholder { color: var(--text-muted); }
+    .search:focus { outline: none; border-color: var(--accent); }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .filter {
+      font: inherit; font-size: 0.8125rem; font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter:hover { border-color: var(--accent); color: var(--heading); }
+    .filter.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+    [data-theme="dark"] .filter.active { background: var(--accent); border-color: var(--accent); }
+
+    .table { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); }
+    .tr {
+      display: grid;
+      grid-template-columns: minmax(0, 2.4fr) 0.9fr 1.4fr 1fr 0.8fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.8rem 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .tr.th { border-top: none; background: var(--surface); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+    .p-name { color: var(--heading); font-weight: 500; }
+    .p-sym { color: var(--text-muted); font-size: 0.8125rem; margin-left: 0.35rem; }
+    .score { display: flex; align-items: center; gap: 0.6rem; }
+    .score-bar { flex: 0 0 64px; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+    .score-bar i { display: block; height: 100%; background: var(--gold); }
+    .score-num { font-variant-numeric: tabular-nums; color: var(--heading); font-weight: 500; }
+    .muted { color: var(--text-muted); }
+    .row-link { color: var(--accent); text-decoration: none; font-size: 0.8125rem; font-weight: 500; white-space: nowrap; }
+    .row-link:hover { text-decoration: underline; }
+    .table-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.8125rem; color: var(--text-muted); }
+    .btn-more {
+      font: inherit; font-size: 0.875rem; font-weight: 500;
+      padding: 8px 18px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--heading);
+      background: transparent;
+      color: var(--heading);
+      cursor: pointer;
+    }
+    .btn-more:hover { background: var(--heading); color: var(--bg); }
+    .empty { padding: 2rem 1.25rem; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
+
+    /* ── MAPA MENTAL ── */
+    .map-root {
+      display: flex; align-items: center; gap: 1rem;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #0A1628 0%, #1E3A6E 100%);
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+    .map-root svg { flex: 0 0 auto; width: 36px; height: 36px; color: #D4B45A; }
+    .map-root-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; line-height: 1.25; }
+    .map-root-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.65); }
+    .map-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; position: relative; }
+    .branch {
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 12px 12px;
+      background: var(--card);
+      padding: 1.1rem 1.15rem 1.2rem;
+    }
+    .branch-num { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gold); }
+    .branch-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--heading); line-height: 1.3; margin: 0.15rem 0 0.6rem; }
+    .branch ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .branch li { font-size: 0.85rem; line-height: 1.45; color: var(--text-secondary); padding-left: 0.95rem; position: relative; }
+    .branch li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .map-note { margin-top: 1.5rem; font-size: 0.8125rem; color: var(--text-muted); text-align: center; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 64px 5vw;
+      background: linear-gradient(160deg, #0A1628 0%, #122040 100%);
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-title { font-family: var(--font-serif); font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 600; color: #fff; line-height: 1.25; max-width: 640px; }
+    .cta-desc { color: rgba(255,255,255,0.65); margin-top: 0.5rem; }
+    .btn-primary {
+      padding: 14px 28px;
+      background: #2563EB;
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 0.9375rem; font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #1D4ED8; transform: translateY(-1px); }
+
+    .disclaimer { padding: 1.5rem 5vw; font-size: 0.8125rem; color: var(--text-muted); background: var(--surface); border-top: 1px solid var(--border); }
+
+    /* ── FOOTER (igual a taia.ma) ── */
+    footer {
+      background: #060E1C;
+      color: rgba(255,255,255,0.4);
+      padding: 2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8125rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.7); }
+    .footer-logo { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.7); }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 1000px) {
+      .map-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: fixed; top: 64px; left: 0; right: 0;
+        background: var(--bg);
+        padding: 1rem 5vw 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .hamburger { display: flex; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .feat-grid, .map-grid { grid-template-columns: 1fr; }
+      .tr { grid-template-columns: minmax(0, 1fr) auto; gap: 0.35rem 1rem; }
+      .tr .c-count, .tr .c-date { display: none; }
+      .tr.th .c-score { display: none; }
+      .tr .c-link { grid-column: 2; grid-row: 1; }
+      .tr .c-score { grid-column: 1 / -1; }
+    }
+
+    /* Esconde apenas o idioma inativo (mesma regra de taia.ma) */
+    .lang-pt [data-lang="en"],
+    .lang-en [data-lang="pt"] { display: none !important; }
+  </style>
+</head>
+<body class="lang-en">
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Taia<span>.ma</span> Research</a>
+
+  <ul class="nav-links">
+    <li><a href="/#about"><span data-lang="pt">Sobre</span><span data-lang="en">About</span></a></li>
+    <li><a href="/#services"><span data-lang="pt">Serviços</span><span data-lang="en">Services</span></a></li>
+    <li><a href="/#research"><span data-lang="pt">Pesquisa</span><span data-lang="en">Research</span></a></li>
+    <li><a href="altcoins.html" class="active">Altcoins</a></li>
+    <li><a href="/#publications"><span data-lang="pt">Publicações</span><span data-lang="en">Publications</span></a></li>
+    <li><a href="/#contact"><span data-lang="pt">Contato</span><span data-lang="en">Contact</span></a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Light / dark mode" title="Light / dark mode">
+      <span class="icon-moon">☾</span><span class="icon-sun">☀</span>
+    </button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- HEADER -->
+<header class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span data-lang="pt">Altcoins · arquivo de pesquisa 2023–2025</span>
+      <span data-lang="en">Altcoins · research archive 2023–2025</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-lang="pt"><em class="js-projects">—</em> projetos de altcoins, analisados e avaliados</span>
+      <span data-lang="en"><em class="js-projects">—</em> altcoin projects, analyzed and rated</span>
+    </h1>
+    <p class="hero-desc">
+      <span data-lang="pt">Análises de fundamentos, tokenomics, on-chain e gráfico publicadas originalmente no Crowd.news, com nota de 1 a 5 por projeto. Conteúdo histórico, não é recomendação de investimento.</span>
+      <span data-lang="en">Fundamentals, tokenomics, on-chain and chart analyses first published on Crowd.news, each project scored 1 to 5. Historical content, not investment advice.</span>
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num js-projects">—</div>
+        <div class="stat-label"><span data-lang="pt">projetos cobertos</span><span data-lang="en">projects covered</span></div>
+      </div>
+      <div>
+        <div class="stat-num js-rated">—</div>
+        <div class="stat-label"><span data-lang="pt">projetos com nota</span><span data-lang="en">projects rated</span></div>
+      </div>
+      <div>
+        <div class="stat-num js-analyses">—</div>
+        <div class="stat-label"><span data-lang="pt">análises publicadas</span><span data-lang="en">analyses published</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- DESTAQUES -->
+<section id="featured">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label"><span data-lang="pt">Destaques</span><span data-lang="en">Featured</span></div>
+      <div class="divider"></div>
+      <h2 class="section-title">
+        <span data-lang="pt">Análises em destaque</span>
+        <span data-lang="en">Featured analyses</span>
+      </h2>
+      <p class="section-desc">
+        <span data-lang="pt">Seleção das análises mais lidas e debatidas. Os textos completos estão no Crowd.news, em inglês.</span>
+        <span data-lang="en">A selection of the most read and discussed analyses. Full texts are on Crowd.news.</span>
+      </p>
+    </div>
+    <div class="feat-grid" id="feat-grid"></div>
+  </div>
+</section>
+
+
+<!-- SCORECARDS -->
+<section id="scorecards" class="alt">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label"><span data-lang="pt">Cobertura</span><span data-lang="en">Coverage</span></div>
+      <div class="divider"></div>
+      <h2 class="section-title">
+        <span data-lang="pt">Projetos analisados e notas</span>
+        <span data-lang="en">Projects analyzed and scores</span>
+      </h2>
+      <p class="section-desc">
+        <span data-lang="pt">Nota média das minhas avaliações de 1 a 5 em cada projeto (tokenomics, comunidade, on-chain, progresso e outras), com a data da última análise.</span>
+        <span data-lang="en">Average of my 1–5 ratings for each project (tokenomics, community, on-chain, progress and more), with the date of the latest analysis.</span>
+      </p>
+    </div>
+
+    <div class="tools">
+      <input class="search" id="search" type="search" data-ph-pt="Buscar projeto ou ticker" data-ph-en="Search project or ticker" placeholder="Search project or ticker" />
+      <div class="filters" id="filters"></div>
+    </div>
+
+    <div class="table" id="table"></div>
+    <div class="table-foot">
+      <span id="count"></span>
+      <button class="btn-more" id="more" type="button"></button>
+    </div>
+  </div>
+</section>
+
+
+<!-- MÉTODO / MAPA MENTAL -->
+<section id="method">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label"><span data-lang="pt">Método</span><span data-lang="en">Method</span></div>
+      <div class="divider"></div>
+      <h2 class="section-title">
+        <span data-lang="pt">Como eu analiso altcoins</span>
+        <span data-lang="en">How I analyze altcoins</span>
+      </h2>
+      <p class="section-desc">
+        <span data-lang="pt">O mapa do método por trás das análises: dos fundamentos e da tokenomics ao gráfico, ao macro e ao acompanhamento de cada projeto.</span>
+        <span data-lang="en">A map of the method behind the analyses: from fundamentals and tokenomics to charts, macro and following up on each project.</span>
+      </p>
+    </div>
+
+    <div class="map-root">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6.2l3.6 3.6M18 6.2l-3.6 3.6M6 17.8l3.6-3.6M18 17.8l-3.6-3.6"/></svg>
+      <div>
+        <div class="map-root-title"><span data-lang="pt">Método Taiamã de análise cripto</span><span data-lang="en">Taiamã's crypto analysis method</span></div>
+        <div class="map-root-sub"><span data-lang="pt">8 frentes, aplicadas a cada projeto</span><span data-lang="en">8 lenses, applied to every project</span></div>
+      </div>
+    </div>
+    <div class="map-grid" id="map-grid"></div>
+    <p class="map-note">
+      <span data-lang="pt">Extraído de 523 análises publicadas entre out/2023 e mar/2025.</span>
+      <span data-lang="en">Drawn from 523 analyses published between Oct 2023 and Mar 2025.</span>
+    </p>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<div class="cta">
+  <div>
+    <div class="cta-title">
+      <span data-lang="pt">Precisa de uma análise de um token ou setor específico?</span>
+      <span data-lang="en">Need an analysis of a specific token or sector?</span>
+    </div>
+    <p class="cta-desc">
+      <span data-lang="pt">Fundamentos, tokenomics e cenários, aplicados ao seu caso.</span>
+      <span data-lang="en">Fundamentals, tokenomics and scenarios, applied to your case.</span>
+    </p>
+  </div>
+  <a href="https://calendly.com/taiama" class="btn-primary" target="_blank" rel="noopener">
+    <span data-lang="pt">Agendar conversa</span>
+    <span data-lang="en">Book a meeting</span>
+  </a>
+</div>
+
+<div class="disclaimer">
+  <span data-lang="pt">Análises históricas publicadas entre 2023 e 2025 no Crowd.news. Preços e opiniões podem estar desatualizados. Este conteúdo é informativo e não constitui recomendação de investimento.</span>
+  <span data-lang="en">Historical analyses published on Crowd.news between 2023 and 2025. Prices and views may be outdated. This content is informational and is not investment advice.</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Taia.ma Research</div>
+  <div>
+    <span data-lang="pt">© 2026 Taiamã Demaman. Todos os direitos reservados.</span>
+    <span data-lang="en">© 2026 Taiamã Demaman. All rights reserved.</span>
+  </div>
+  <a href="#" data-lang="pt">Voltar ao topo ↑</a>
+  <a href="#" data-lang="en">Back to top ↑</a>
+</footer>
+
+
+<script>
+  /* Dados dos projetos, gerados da captura do Crowd.news:
+     n = nome, s = ticker, c = nº de análises, a = nota média (1–5), l = última análise (AAAA-MM),
+     u = link da análise mais recente, k = tipos de análise */
+  const PROJECTS = /*__DATA__*/[{"n":"Ethereum","s":"ETH","c":12,"a":3.9,"l":"2025-01","u":"https://crowd.news/post/trump-is-staking-eth-678f9f90121f29dc4266a883","k":["post","other","progress"]},{"n":"Worldcoin","s":"WLD","c":10,"a":3.2,"l":"2024-10","u":"https://crowd.news/post/worldcoin-opinions-from-another-angle-6711f16f3ebb2202158368db","k":["post","progress"]},{"n":"Cardano","s":"ADA","c":4,"a":5,"l":"2024-12","u":"https://crowd.news/post/cardano-hydra-ultra-high-speed-674fafb716b5e814bc02e495","k":["post","progress"]},{"n":"XRP","s":"XRP","c":4,"a":5,"l":"2024-11","u":"https://crowd.news/post/xrp-warnings-and-silver-linings-6742317e2ed3ed4c4584087f","k":["post","progress"]},{"n":"Zaros","s":"","c":4,"a":4.8,"l":"2024-06","u":"https://crowd.news/post/zaros-tokenomics-review-by-taiama-demaman-6664a2849be18d49c867b5db","k":["tokenomics","progress","micro"]},{"n":"DOG•GO•TO•THE•MOON","s":"DOG","c":4,"a":4.7,"l":"2024-10","u":"https://crowd.news/post/when-binance-670baf57341435cb818dfb29","k":["post","progress","tokenomics","micro"]},{"n":"Morpheus","s":"MOR","c":4,"a":4.5,"l":"2024-02","u":"https://crowd.news/post/morpheus-mor-progress-review-by-taiama-demaman-65d7820d97815b443a5d2968","k":["progress","other","micro"]},{"n":"Base","s":"","c":4,"a":4,"l":"2024-09","u":"https://crowd.news/post/bases-userbase-growing-which-tokens-to-see-66f6ea9dc123106ccb824a83","k":["post","progress","micro"]},{"n":"Bonk","s":"BONK","c":4,"a":3.8,"l":"2024-01","u":"https://crowd.news/post/bonk-bonk-degen-review-by-taiama-demaman-659b0e5c2316f3f1a630d521","k":["progress","community","tokenomics"]},{"n":"PinkSale","s":"PINKSALE","c":4,"a":1.3,"l":"2023-11","u":"https://crowd.news/post/pinksale-tokenomics-review-by-taiama-demaman-6568ea34fa024a4cbcec7429","k":["tokenomics","progress","community","micro"]},{"n":"VinuChain Coin (VC)","s":"VC","c":4,"a":1.3,"l":"2023-12","u":"https://crowd.news/post/vinuchain-coin-(vc)-VC-progress-review-by-taiama-demaman-65793c9f8e6de3c66d9e5efb","k":["progress","tokenomics","community","micro"]},{"n":"Praxis Nation","s":"","c":4,"a":null,"l":"2024-11","u":"https://crowd.news/post/cities-of-the-future-congress-672c3646e1bdbfdfdc0665d8","k":["post"]},{"n":"Maker","s":"MKR","c":3,"a":5,"l":"2024-10","u":"https://crowd.news/post/671888343ebb220215837080","k":["post","progress"]},{"n":"Solana","s":"SOL","c":3,"a":5,"l":"2024-10","u":"https://crowd.news/post/solanas-transactions-count-will-make-you-feel-bullish-670601699966bc6592585e4d","k":["post","progress"]},{"n":"Wormhole","s":"","c":3,"a":4.7,"l":"2024-02","u":"https://crowd.news/post/wormhole-tokenomics-review-by-taiama-demaman-65cc371b6b73dd0e41f3a1b4","k":["tokenomics","progress","micro"]},{"n":"Brickken","s":"BKN","c":3,"a":4,"l":"2024-09","u":"https://crowd.news/post/brickken-ta-targets-for-the-long-run-66f8087d60fd7b6ce8b569be","k":["post","progress"]},{"n":"Flux","s":"FLUX","c":3,"a":4,"l":"2024-04","u":"https://crowd.news/post/flux-flux-degen-review-by-taiama-demaman-6625a812cc2dac92c6aed774","k":["progress","onchain","micro"]},{"n":"Myria","s":"MYRIA","c":3,"a":4,"l":"2023-12","u":"https://crowd.news/post/myria-progress-review-by-taiama-demaman-657d228cbcf269802ce626d7","k":["progress","micro"]},{"n":"RNS ID","s":"","c":3,"a":4,"l":"2024-02","u":"https://crowd.news/post/rns-id-progress-review-by-taiama-demaman-65cf8be7a213e0c730a9bdaa","k":["progress","micro"]},{"n":"Nodle","s":"NODL","c":3,"a":3.7,"l":"2023-12","u":"https://crowd.news/post/nodle-NODL-tokenomics-review-by-taiama-demaman-658b8418bcf269802ce6288b","k":["tokenomics","other","micro"]},{"n":"CHEYNI","s":"","c":3,"a":3.5,"l":"2024-10","u":"https://crowd.news/post/cult-youtube-watch2earn-670897f4281df99f66ac11fb","k":["post","progress","micro"]},{"n":"ALEX Lab","s":"ALEX","c":3,"a":3.3,"l":"2023-12","u":"https://crowd.news/post/alex-lab-alex-degen-review-by-taiama-demaman-65882157370269801186d399","k":["progress","micro"]},{"n":"$REKT","s":"REKT","c":3,"a":2.3,"l":"2023-12","u":"https://crowd.news/post/dollarrekt-REKT-progress-review-by-taiama-demaman-657e796d370269801186d294","k":["progress","tokenomics","micro"]},{"n":"Silly Dragon","s":"SILLY","c":3,"a":2.3,"l":"2024-01","u":"https://crowd.news/post/silly-dragon-silly-degen-review-by-taiama-demaman-659b73f5364d1cf1c2b90aca","k":["progress","tokenomics","micro"]},{"n":"Sleepless AI","s":"AI","c":3,"a":2.3,"l":"2024-01","u":"https://crowd.news/post/sleepless-ai-ai-community-review-by-taiama-demaman-65ad9e498af0b5896abfefb0","k":["community","tokenomics","micro"]},{"n":"NFTitties","s":"","c":3,"a":2,"l":"2023-11","u":"https://crowd.news/post/nftitties-marketing-review-by-taiama-demaman-654483e6533db2e4ddd27178","k":["other","micro"]},{"n":"Tether USDt","s":"USDT","c":3,"a":2,"l":"2024-09","u":"https://crowd.news/post/is-tether-safe-yes-safer-than-ever-66f2164dfac2b270bd878b6b","k":["post","progress","micro"]},{"n":"Salsa Valley","s":"SALSA","c":3,"a":1.7,"l":"2023-12","u":"https://crowd.news/post/salsa-valley-SALSA-progress-review-by-taiama-demaman-65730b7b9d851fb10ac1bcbf","k":["progress","tokenomics","micro"]},{"n":"Haven Protocol","s":"XHV","c":3,"a":1,"l":"2024-02","u":"https://crowd.news/post/haven-protocol-xhv-progress-review-by-taiama-demaman-65d69d438ddb66b41b901548","k":["progress","micro"]},{"n":"Celestia","s":"TIA","c":3,"a":null,"l":"2024-10","u":"https://crowd.news/post/1bi-marketcap-printed-fly-you-fools-6722f3303ebb220215837bcb","k":["post"]},{"n":"MOO DENG","s":"MOODENG","c":3,"a":null,"l":"2024-09","u":"https://crowd.news/post/moo-dent-68percent-in-15h-66f6ef4060fd7b6ce8b56887","k":["post"]},{"n":"Dai","s":"DAI","c":2,"a":5,"l":"2024-01","u":"https://crowd.news/post/dai-dai-tokenomics-review-by-taiama-demaman-65a46744c404e9597e2d977b","k":["tokenomics","micro"]},{"n":"Hivemapper","s":"HONEY","c":2,"a":5,"l":"2024-09","u":"https://crowd.news/post/token-dump-fakehoney-66f4d5d0f9f863fdb2d2b253","k":["post","progress"]},{"n":"Stacks","s":"STX","c":2,"a":5,"l":"2024-07","u":"https://crowd.news/post/stacks-stx-progress-review-by-taiama-demaman-6695f15bc1b4d6e47f9f4bef","k":["progress"]},{"n":"Centrifuge","s":"CFG","c":2,"a":4.5,"l":"2024-09","u":"https://crowd.news/post/66dc8ecefae10acc4ac37aac","k":["progress","other"]},{"n":"Numeraire","s":"NMR","c":2,"a":4.5,"l":"2023-10","u":"https://crowd.news/post/numeraire-NMR-community-review-by-taiama-demaman-653dd9c39367d51051c0c16d","k":["community","micro"]},{"n":"Braintrust","s":"BTRST","c":2,"a":4,"l":"2024-02","u":"https://crowd.news/post/braintrust-btrst-tokenomics-review-by-taiama-demaman-65c008d94bdae5f5def9116c","k":["tokenomics","micro"]},{"n":"PWR Labs","s":"","c":2,"a":3.5,"l":"2024-02","u":"https://crowd.news/post/pwr-labs-progress-review-by-taiama-demaman-65d01a2c659c8cf02551f0b7","k":["progress","micro"]},{"n":"Shardeum","s":"SHM","c":2,"a":3.5,"l":"2024-04","u":"https://crowd.news/post/shardeum-shm-tokenomics-review-by-taiama-demaman-6619ffb578625674739ba934","k":["tokenomics","micro"]},{"n":"The Graph","s":"GRT","c":2,"a":3.5,"l":"2023-12","u":"https://crowd.news/post/the-graph-grt-degen-review-by-taiama-demaman-6588dd4c370269801186d39d","k":["progress","micro"]},{"n":"DexHunter","s":"HUNT","c":2,"a":3,"l":"2023-12","u":"https://crowd.news/post/dexhunter-HUNT-tokenomics-review-by-taiama-demaman-65721b439d851fb10ac1bc8f","k":["tokenomics","micro"]},{"n":"Ethena","s":"ENA","c":2,"a":3,"l":"2024-09","u":"https://crowd.news/post/66f7780460fd7b6ce8b56913","k":["post","micro"]},{"n":"Farmsent","s":"FARMS","c":2,"a":3,"l":"2024-02","u":"https://crowd.news/post/farmsent-farms-progress-review-by-taiama-demaman-65d0393e7b0332f045d32a39","k":["progress","micro"]},{"n":"Gentoo Finance","s":"","c":2,"a":3,"l":"2023-10","u":"https://crowd.news/post/gentoo-finance-review-by-taiama-demaman-6533372afd27bbfdc6882975","k":["micro","other"]},{"n":"Eclipse Quest","s":"","c":2,"a":2.5,"l":"2023-11","u":"https://crowd.news/post/eclipse-quest-tokenomics-review-by-taiama-demaman-655a4cf97e4061f2dcf3cedd","k":["tokenomics","micro"]},{"n":"Privasea","s":"","c":2,"a":2.5,"l":"2023-12","u":"https://crowd.news/post/privasea-review-by-taiama-demaman-6574cbcfe68e5d2c8d7fb2f5","k":["micro","tokenomics"]},{"n":"Propbase","s":"Props","c":2,"a":2.5,"l":"2023-11","u":"https://crowd.news/post/propbase-Props-tokenomics-review-by-taiama-demaman-6549daa11b887a0358587dd2","k":["tokenomics","micro"]},{"n":"DiboPay","s":"","c":2,"a":2,"l":"2024-02","u":"https://crowd.news/post/dibopay-progress-review-by-taiama-demaman-65db958f1d041fe31b1df7e7","k":["progress","micro"]},{"n":"Stars Arena","s":"","c":2,"a":2,"l":"2024-11","u":"https://crowd.news/post/socialfi-rebirth-6729a46cb2d853dff90436d4","k":["post","micro"]},{"n":"Only U Bank","s":"","c":2,"a":1.5,"l":"2024-02","u":"https://crowd.news/post/only-u-bank-progress-review-by-taiama-demaman-65db91491d041fe31b1df7e4","k":["progress","micro"]},{"n":"Sarcophagus","s":"SARCO","c":2,"a":1.5,"l":"2023-12","u":"https://crowd.news/post/sarcophagus-SARCO-on-chain-activity-review-by-taiama-demaman-658c14e2370269801186d3ce","k":["onchain","micro"]},{"n":"Dogeverse","s":"DOGEVERSE","c":2,"a":1,"l":"2024-05","u":"https://crowd.news/post/dogeverse-dogeverse-tokenomics-review-by-taiama-demaman-663801a7be2406a4893e45e3","k":["tokenomics","micro"]},{"n":"Nimbl","s":"Nimbl","c":2,"a":1,"l":"2024-11","u":"https://crowd.news/post/and-its-gone-from-influencer-marketplace-to-health-care-6729961be1bdbfdfdc066344","k":["post","micro"]},{"n":"Proof of No Work","s":"PoNW","c":2,"a":1,"l":"2023-12","u":"https://crowd.news/post/proof-of-no-work-PoNW-review-by-taiama-demaman-656b0fe2b3ee45a71b4d144e","k":["micro","tokenomics"]},{"n":"Decentralized Science","s":"DeSci","c":2,"a":null,"l":"2024-12","u":"https://crowd.news/post/676b9b114ac3405966fc4b68","k":["post"]},{"n":"Sui","s":"SUI","c":2,"a":null,"l":"2024-10","u":"https://crowd.news/post/sentiment-analysis-4x-returns-in-63-days-67155679341b1f02303eefd2","k":["post"]},{"n":"Arbitrum","s":"ARB","c":1,"a":5,"l":"2024-08","u":"https://crowd.news/post/arbitrum-arb-progress-review-by-taiama-demaman-66ca03bfd21b270def29ce38","k":["progress"]},{"n":"DarkFi","s":"","c":1,"a":5,"l":"2024-04","u":"https://crowd.news/post/darkfi-review-by-taiama-demaman-661b54cb78625674739ba955","k":["micro"]},{"n":"DIMO","s":"DIMO","c":1,"a":5,"l":"2024-02","u":"https://crowd.news/post/dimo-review-by-taiama-demaman-65d040d17b0332f045d32a41","k":["micro"]},{"n":"Formacar Action","s":"FCG","c":1,"a":5,"l":"2023-10","u":"https://crowd.news/post/formacar-action-FCG-review-by-taiama-demaman-652b6f8e37ef3fae8548ab08","k":["micro"]},{"n":"Helium Mobile","s":"MOBILE","c":1,"a":5,"l":"2024-09","u":"https://crowd.news/post/66dd1511cfd35ecc65ed89f8","k":["progress"]},{"n":"IOTA","s":"MIOTA","c":1,"a":5,"l":"2024-06","u":"https://crowd.news/post/iota-miota-progress-review-by-taiama-demaman-665fc8c49be18d49c867b5aa","k":["progress"]},{"n":"Linea","s":"TBA","c":1,"a":5,"l":"2024-08","u":"https://crowd.news/post/linea-tba-progress-review-by-taiama-demaman-66c34d4999139d33edd3358a","k":["progress"]},{"n":"Moongate","s":"","c":1,"a":5,"l":"2024-03","u":"https://crowd.news/post/moongate-review-by-taiama-demaman-65f77b2f31640ac3229da9b3","k":["micro"]},{"n":"Onyx Blockchain","s":"","c":1,"a":5,"l":"2024-01","u":"https://crowd.news/post/onyx-blockchain-review-by-taiama-demaman-659f4e7b41cb36599a72516e","k":["micro"]},{"n":"Rainfall","s":"","c":1,"a":5,"l":"2024-01","u":"https://crowd.news/post/rainfall-review-by-taiama-demaman-65ab53fffd9ca1328725aa0f","k":["micro"]},{"n":"Rollbit Coin","s":"RLB","c":1,"a":5,"l":"2023-12","u":"https://crowd.news/post/rollbit-coin-RLB-progress-review-by-taiama-demaman-658d7612370269801186d40a","k":["progress"]},{"n":"Rootstock Infrastructure Framework","s":"RIF","c":1,"a":5,"l":"2023-12","u":"https://crowd.news/post/rootstock-infrastructure-framework-RIF-review-by-taiama-demaman-658d507ebcf269802ce628cc","k":["micro"]},{"n":"Story","s":"","c":1,"a":5,"l":"2024-08","u":"https://crowd.news/post/story-review-by-taiama-demaman-66c77a06c1a2bfdf36665b7d","k":["other"]},{"n":"Swapix","s":"","c":1,"a":5,"l":"2024-03","u":"https://crowd.news/post/swapix-review-by-taiama-demaman-65e4f4e21c5e237c40e524c2","k":["micro"]},{"n":"The Forge","s":"","c":1,"a":5,"l":"2024-02","u":"https://crowd.news/post/the-forge-review-by-taiama-demaman-65d7ba9ba733dd4456565b3b","k":["micro"]},{"n":"The Kingfisher","s":"","c":1,"a":5,"l":"2023-12","u":"https://crowd.news/post/the-kingfisher-review-by-taiama-demaman-657e5714bcf269802ce626ea","k":["micro"]},{"n":"TRDR","s":"","c":1,"a":5,"l":"2023-12","u":"https://crowd.news/post/trdr-review-by-taiama-demaman-657e5c84370269801186d284","k":["micro"]},{"n":"Truther","s":"","c":1,"a":5,"l":"2024-03","u":"https://crowd.news/post/truther-review-by-taiama-demaman-65ed3a14249990c46da2b78f","k":["micro"]},{"n":"Uniswap","s":"UNI","c":1,"a":5,"l":"2024-08","u":"https://crowd.news/post/uniswap-uni-progress-review-by-taiama-demaman-66c0898bb723c3cff567d524","k":["progress"]},{"n":"Adventure Gold","s":"AGLD","c":1,"a":4,"l":"2023-11","u":"https://crowd.news/post/adventure-gold-agld-degen-review-by-taiama-demaman-656212d408ef35ff55bd5063","k":["progress"]},{"n":"alpha growth","s":"","c":1,"a":4,"l":"2023-12","u":"https://crowd.news/post/alpha-growth-review-by-taiama-demaman-657e80da370269801186d296","k":["micro"]},{"n":"BTC.US","s":"","c":1,"a":4,"l":"2023-12","u":"https://crowd.news/post/btc.us-review-by-taiama-demaman-6588f9f2370269801186d3a0","k":["micro"]},{"n":"Enjin Coin","s":"ENJ","c":1,"a":4,"l":"2023-10","u":"https://crowd.news/post/enjin-coin-ENJ-review-by-taiama-demaman-65406c25ee8c2689cd5cb601","k":["micro"]},{"n":"Hashflow","s":"HFT","c":1,"a":4,"l":"2023-11","u":"https://crowd.news/post/hashflow-HFT-progress-review-by-taiama-demaman-6544889ec2a032e4fad5bc89","k":["progress"]},{"n":"ivendpay","s":"","c":1,"a":4,"l":"2023-10","u":"https://crowd.news/post/ivendpay-review-by-taiama-demaman-651e462c1d7c7626884370af","k":["micro"]},{"n":"Neutron","s":"NTRN","c":1,"a":4,"l":"2023-10","u":"https://crowd.news/post/neutron-NTRN-review-by-taiama-demaman-6539eef3823c4274c07b1d5c","k":["micro"]},{"n":"Phaver","s":"Phaver","c":1,"a":4,"l":"2023-10","u":"https://crowd.news/post/phaver-tokenomics-review-by-taiama-demaman-653579b6fd27bbfdc68829d3","k":["tokenomics"]},{"n":"Stake Together","s":"","c":1,"a":4,"l":"2023-11","u":"https://crowd.news/post/stake-together-review-by-taiama-demaman-65681f98fa024a4cbcec73c6","k":["micro"]},{"n":"Truflation","s":"TFI","c":1,"a":4,"l":"2023-12","u":"https://crowd.news/post/truflation-TFI-review-by-taiama-demaman-657a261e3c0447c65264a71e","k":["micro"]},{"n":"analoS","s":"ANALOS","c":1,"a":3,"l":"2023-12","u":"https://crowd.news/post/analos-review-by-taiama-demaman-658a6dc3370269801186d3a7","k":["micro"]},{"n":"ATOR Protocol","s":"ATOR","c":1,"a":3,"l":"2023-12","u":"https://crowd.news/post/ator-protocol-ator-degen-review-by-taiama-demaman-6570d09ac00f09b1251c4015","k":["progress"]},{"n":"Buk technology","s":"","c":1,"a":3,"l":"2024-03","u":"https://crowd.news/post/buk-technology-review-by-taiama-demaman-65f3cc5e6acb58c3063a2402","k":["micro"]},{"n":"BurgerCities","s":"BURGER","c":1,"a":3,"l":"2023-10","u":"https://crowd.news/post/burgercities-BURGER-review-by-taiama-demaman-6529ee2137ef3fae8548aada","k":["micro"]},{"n":"Dusk","s":"DUSK","c":1,"a":3,"l":"2024-05","u":"https://crowd.news/post/dusk-dusk-degen-review-by-taiama-demaman-6636fb33612543a46e4f3259","k":["progress"]},{"n":"Iagent","s":"","c":1,"a":3,"l":"2024-03","u":"https://crowd.news/post/iagent-review-by-taiama-demaman-65f783fc6acb58c3063a2485","k":["micro"]},{"n":"Musii","s":"","c":1,"a":3,"l":"2024-02","u":"https://crowd.news/post/musii-review-by-taiama-demaman-65bfe22771614cf5f9ef8ea8","k":["micro"]},{"n":"Pirate Chain","s":"ARRR","c":1,"a":3,"l":"2023-11","u":"https://crowd.news/post/pirate-chain-ARRR-review-by-taiama-demaman-654792d9533db2e4ddd271b0","k":["micro"]},{"n":"Proof of Some Work","s":"PoSW","c":1,"a":3,"l":"2023-12","u":"https://crowd.news/post/proof-of-some-work-PoSW-review-by-taiama-demaman-656e240dc4316533095e511f","k":["micro"]},{"n":"Pyth Network","s":"PYTH","c":1,"a":3,"l":"2023-12","u":"https://crowd.news/post/pyth-network-pyth-degen-review-by-taiama-demaman-657a84083c0447c65264a727","k":["progress"]},{"n":"Tether Gold","s":"XAUt","c":1,"a":3,"l":"2024-06","u":"https://crowd.news/post/tether-gold-xaut-review-by-taiama-demaman-667882cda1ef3cebfa52728d","k":["other"]},{"n":"Berachain BERA","s":"BERA","c":1,"a":2,"l":"2024-02","u":"https://crowd.news/post/berachain-bera-bera-review-by-taiama-demaman-65c7990706bea059ba9fb2fa","k":["micro"]},{"n":"Cheelee","s":"CHEEL","c":1,"a":2,"l":"2024-02","u":"https://crowd.news/post/cheelee-cheel-review-by-taiama-demaman-65d239616275f958a18581b0","k":["micro"]},{"n":"Chiliz","s":"CHZ","c":1,"a":2,"l":"2023-10","u":"https://crowd.news/post/chiliz-chz-degen-review-by-taiama-demaman-654094bedcaa1389b03fc484","k":["progress"]},{"n":"DeGenInsure","s":"DGNS","c":1,"a":2,"l":"2023-12","u":"https://crowd.news/post/degeninsure-DGNS-review-by-taiama-demaman-657b46553c0447c65264a751","k":["micro"]},{"n":"Goldfinch","s":"GFI","c":1,"a":2,"l":"2023-12","u":"https://crowd.news/post/goldfinch-gfi-degen-review-by-taiama-demaman-657c97e9370269801186d238","k":["progress"]},{"n":"HEX","s":"HEX","c":1,"a":2,"l":"2023-12","u":"https://crowd.news/post/hex-review-by-taiama-demaman-657931018e6de3c66d9e5ef9","k":["micro"]},{"n":"Merlin Chain","s":"MERL","c":1,"a":2,"l":"2024-08","u":"https://crowd.news/post/merlin-chain-merl-review-by-taiama-demaman-66c81592d21b270def29cccd","k":["other"]},{"n":"Only1","s":"LIKE","c":1,"a":2,"l":"2023-11","u":"https://crowd.news/post/only1-LIKE-progress-review-by-taiama-demaman-655103e9aec5caa3a240b8f7","k":["progress"]},{"n":"Smart Forest","s":"","c":1,"a":2,"l":"2023-12","u":"https://crowd.news/post/smart-forest-review-by-taiama-demaman-658b7ab6370269801186d3b8","k":["micro"]},{"n":"Year of the Dragon","s":"YOD","c":1,"a":2,"l":"2024-01","u":"https://crowd.news/post/year-of-the-dragon-YOD-review-by-taiama-demaman-659b3eab364d1cf1c2b90abb","k":["micro"]},{"n":"zkHive","s":"ZKHIVE","c":1,"a":2,"l":"2024-04","u":"https://crowd.news/post/zkhive-zkhive-review-by-taiama-demaman-662513636a438092a963231d","k":["micro"]},{"n":"Ekta","s":"EKTA","c":1,"a":1,"l":"2024-03","u":"https://crowd.news/post/ekta-ekta-review-by-taiama-demaman-660073f25655faa95af70f4f","k":["micro"]},{"n":"Loong","s":"loong","c":1,"a":1,"l":"2023-12","u":"https://crowd.news/post/loong-review-by-taiama-demaman-658fc2982316f3f1a630d3d6","k":["micro"]},{"n":"Nunza","s":"","c":1,"a":1,"l":"2024-03","u":"https://crowd.news/post/nunza-review-by-taiama-demaman-65f3adf96acb58c3063a23fc","k":["micro"]},{"n":"Ping","s":"","c":1,"a":1,"l":"2023-10","u":"https://crowd.news/post/ping-review-by-taiama-demaman-65204e57d5977c99b415d0e2","k":["micro"]},{"n":"RaceFi","s":"RACEFI","c":1,"a":1,"l":"2023-10","u":"https://crowd.news/post/racefi-community-review-by-taiama-demaman-653de154912e061036f16424","k":["community"]},{"n":"TEXAN","s":"","c":1,"a":1,"l":"2023-12","u":"https://crowd.news/post/texan-review-by-taiama-demaman-656b1722e9bc05a700c9f5a4","k":["micro"]},{"n":"AI Companions","s":"AIC","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/in-love-with-alexa-66f23eeefac2b270bd878ba5","k":["post"]},{"n":"Big Cheungus","s":"CHEUNGUS","c":1,"a":null,"l":"2024-11","u":"https://crowd.news/post/superdegen-not-financial-advice-memecoin-dyor-673cc66ffcbdfbd5aab614fe","k":["post"]},{"n":"Bio Protocol","s":"BIO","c":1,"a":null,"l":"2024-12","u":"https://crowd.news/post/biodao-royalties-on-chain-with-nfts-676aa82916b5e814bc02fdbf","k":["post"]},{"n":"Chainlink","s":"LINK","c":1,"a":null,"l":"2025-01","u":"https://crowd.news/post/the-last-step-on-blockchain-adoption-needs-oracles-6796308e121f29dc4266abf4","k":["post"]},{"n":"Coinbase Wrapped BTC","s":"CBBTC","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/66f19ceefac2b270bd878b0d","k":["post"]},{"n":"Dogecoin","s":"DOGE","c":1,"a":null,"l":"2024-11","u":"https://crowd.news/post/doge-in-the-us-gov-6733fe76b2d853dff9043f5f","k":["post"]},{"n":"MAGA","s":"TRUMP","c":1,"a":null,"l":"2024-10","u":"https://crowd.news/post/maga-292348percent-crazy-return-in-1year-6704bbcc74bf4b1ec10f7c1f","k":["post"]},{"n":"MIRA","s":"MIRA","c":1,"a":null,"l":"2024-12","u":"https://crowd.news/post/dad-gets-14million-bag-to-fund-kids-brain-tumor-in-4h-676cebd54ac3405966fc4c73","k":["post"]},{"n":"Olympus v2","s":"OHM","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/how-olympus-destroyed-newcomers-66f559eef9f863fdb2d2b342","k":["post"]},{"n":"Plume Network","s":"","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/66f77a0fc123106ccb824b11","k":["post"]},{"n":"Rarimo","s":"RMO","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/the-digital-identity-gold-rush-the-rarimo-project-66f1fbccfac2b270bd878b49","k":["post"]},{"n":"Visa Tokenized Asset Platform","s":"VATP","c":1,"a":null,"l":"2024-10","u":"https://crowd.news/post/visas-rwa-platform-on-ethereum-67046663dc7e2e1ea60793cb","k":["post"]},{"n":"Wrapped Bitcoin","s":"WBTC","c":1,"a":null,"l":"2024-09","u":"https://crowd.news/post/66f19a53fac2b270bd878b09","k":["post"]}];
+
+  const FEATURED = [
+    { s: 'RMO', d: '2024-09', u: 'https://crowd.news/post/the-digital-identity-gold-rush-the-rarimo-project-66f1fbccfac2b270bd878b49',
+      en: ['The Digital Identity Gold Rush: the Rarimo project', 'The race for digital identity: how Rarimo uses NFC passport scans and zero-knowledge proofs to prove who you are without exposing your data.'],
+      pt: ['A corrida do ouro da identidade digital: o projeto Rarimo', 'A disputa pela identidade digital: como o Rarimo usa a leitura do passaporte por NFC e provas de conhecimento zero para provar quem você é sem expor seus dados.'] },
+    { s: 'WLD', d: '2024-10', u: 'https://crowd.news/post/worldcoin-foundation-facing-fined-again-66fc14dc78478b3f1de1f0f4',
+      en: ['Worldcoin Foundation in legal problems (again)', 'Legal actions against Worldcoin around the world, now in South Korea, and their toll on adoption: 6 million users against a goal of 1 billion.'],
+      pt: ['Worldcoin de novo com problemas na Justiça', 'Os processos contra a Worldcoin pelo mundo, agora na Coreia do Sul, e o efeito na adoção: 6 milhões de usuários contra a meta de 1 bilhão.'] },
+    { s: 'OHM', d: '2024-09', u: 'https://crowd.news/post/how-olympus-destroyed-newcomers-66f559eef9f863fdb2d2b342',
+      en: ['The dangers of Ponzinomics', 'Lessons from the OlympusDAO collapse: triple-digit yields that depended on fresh money coming in to keep the system alive.'],
+      pt: ['Os perigos da "ponzinomics"', 'Lições do colapso da OlympusDAO: rendimentos de três dígitos que dependiam da entrada de dinheiro novo para manter o sistema de pé.'] },
+    { s: 'USDT', d: '2024-09', u: 'https://crowd.news/post/is-tether-safe-yes-safer-than-ever-66f2164dfac2b270bd878b6b',
+      en: ['Is USDT safe? A 2024 deep dive on Tether', 'Tether in numbers: about 75% market share, US$ 400 million in revenue in 30 days and reserves loaded with US Treasuries.'],
+      pt: ['O USDT é seguro? Um raio-x da Tether em 2024', 'A Tether em números: cerca de 75% do mercado, US$ 400 milhões de receita em 30 dias e reservas concentradas em títulos do Tesouro americano.'] },
+    { s: 'BIO', d: '2024-12', u: 'https://crowd.news/post/biodao-royalties-on-chain-with-nfts-676aa82916b5e814bc02fdbf',
+      en: ['BioDAO: on-chain royalties with NFTs', 'The protocol behind the main decentralized science (DeSci) DAOs, and a caveat: BIO is a governance token with no claim on royalties.'],
+      pt: ['BioDAO: royalties on-chain com NFTs', 'O protocolo por trás das principais DAOs de ciência descentralizada (DeSci), e um alerta: o BIO é um token de governança, sem direito a royalties.'] },
+    { s: 'XRP', d: '2024-11', u: 'https://crowd.news/post/xrp-warnings-and-silver-linings-6742317e2ed3ed4c4584087f',
+      en: ['XRP: warnings and silver linings', 'Why the rally on hopes of US government use has limits: Ripple holds a large share of the supply and takes profit into rallies.'],
+      pt: ['XRP: alertas e lados positivos', 'Por que a alta com a expectativa de uso pelo governo dos EUA tem limites: a Ripple concentra boa parte da oferta e realiza lucro nas altas.'] },
+  ];
+
+  const BRANCHES = [
+    { pt: 'Tipos de análise', en: 'Types of analysis', items: [
+      ['Posts e série semanal Macro-to-Crypto', 'Posts and the weekly Macro-to-Crypto series'],
+      ['Link posts com "minha leitura"', 'Link posts with "my take"'],
+      ['Micro reviews com sub-notas', 'Micro reviews with sub-scores'],
+      ['Reviews por categoria', 'Reviews by category'],
+      ['Progress: voltar e conferir', 'Progress: revisit and check'],
+      ['Degen & Trade: setups de trade', 'Degen & Trade: trade setups'] ] },
+    { pt: 'Fundamentos do projeto', en: 'Project fundamentals', items: [
+      ['Precisa mesmo de um token?', 'Does it really need a token?'],
+      ['Docs e whitepaper se sustentam?', 'Do docs and whitepaper hold up?'],
+      ['Time e histórico (LinkedIn, Crunchbase)', 'Team and track record (LinkedIn, Crunchbase)'],
+      ['Tração real (SimilarWeb, GitHub)', 'Real traction (SimilarWeb, GitHub)'],
+      ['Teste como novato: usar o produto', 'Newbie test: use the product'],
+      ['Parcerias e auditoria', 'Partnerships and audits'] ] },
+    { pt: 'Tokenomics', en: 'Tokenomics', items: [
+      ['Alocação: insiders vs. público', 'Allocation: insiders vs. public'],
+      ['Vesting convertido em inflação anual', 'Vesting turned into yearly inflation'],
+      ['Utilidade real do token', 'Real token utility'],
+      ['Queima, recompra e receita', 'Burns, buybacks and revenue'],
+      ['Liquidez e concentração de holders', 'Liquidity and holder concentration'],
+      ['Teto de oferta coerente', 'A supply cap that makes sense'] ] },
+    { pt: 'On-chain e fluxos', en: 'On-chain and flows', items: [
+      ['Baleias vs. carteiras pequenas', 'Whales vs. small wallets'],
+      ['Preço médio de quem comprou recente (STH)', 'Recent buyers’ cost basis (STH)'],
+      ['Hash Ribbon e mineradores', 'Hash Ribbon and miners'],
+      ['Reservas em exchanges', 'Exchange reserves'],
+      ['Fluxos de ETF', 'ETF flows'],
+      ['Unlocks em % do market cap', 'Unlocks as % of market cap'] ] },
+    { pt: 'Gráfico e derivativos', en: 'Charts and derivatives', items: [
+      ['Tendências mensal, semanal e 4h', 'Monthly, weekly and 4h trends'],
+      ['Fibonacci e pivôs', 'Fibonacci and pivots'],
+      ['Entrada, stop e alvos', 'Entry, stop and targets'],
+      ['Open interest, long/short e CVD', 'Open interest, long/short and CVD'],
+      ['Mapas de liquidação', 'Liquidation maps'],
+      ['Cenários Bull / Kangaroo / Bear', 'Bull / Kangaroo / Bear scenarios'] ] },
+    { pt: 'Macro e política', en: 'Macro and politics', items: [
+      ['Fed e juros', 'The Fed and rates'],
+      ['Liquidez global', 'Global liquidity'],
+      ['Agenda: CPI, PCE, payroll', 'Data calendar: CPI, PCE, payrolls'],
+      ['Eleições nos EUA e SEC', 'US elections and the SEC'],
+      ['Dominância e Fear & Greed', 'Dominance and Fear & Greed'] ] },
+    { pt: 'Fontes e ferramentas', en: 'Sources and tools', items: [
+      ['TradingView e TRDR', 'TradingView and TRDR'],
+      ['Kingfisher e Coinglass', 'Kingfisher and Coinglass'],
+      ['Glassnode, Arkham e Dune', 'Glassnode, Arkham and Dune'],
+      ['CoinMarketCap e Dropstab', 'CoinMarketCap and Dropstab'],
+      ['SimilarWeb, LinkedIn e Crunchbase', 'SimilarWeb, LinkedIn and Crunchbase'] ] },
+    { pt: 'Nota e acompanhamento', en: 'Scoring and follow-up', items: [
+      ['Nota de 1 a 5 por dimensão', 'A 1–5 score per dimension'],
+      ['Ajustes explícitos (+1, −2)', 'Explicit adjustments (+1, −2)'],
+      ['Fontes listadas no fim', 'Sources listed at the end'],
+      ['Dossiê com links entre análises', 'A dossier linking related analyses'],
+      ['Atualizações e posts de Progress', 'Updates and Progress posts'],
+      ['Avisos: NFA e DYOR', 'Disclaimers: NFA and DYOR'] ] },
+  ];
+
+  const FILTERS = [
+    ['all', 'Todos', 'All'],
+    ['tokenomics', 'Tokenomics', 'Tokenomics'],
+    ['community', 'Comunidade', 'Community'],
+    ['onchain', 'On-chain', 'On-chain'],
+    ['micro', 'Micro review', 'Micro review'],
+    ['progress', 'Progress', 'Progress'],
+    ['post', 'Posts', 'Posts'],
+  ];
+
+  const MONTHS = {
+    pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+    en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  };
+  const PAGE = 15;
+  const state = { q: '', f: 'all', all: false };
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const both = (pt, en) => `<span data-lang="pt">${pt}</span><span data-lang="en">${en}</span>`;
+  const month = ym => {
+    const [y, m] = ym.split('-').map(Number);
+    return both(`${MONTHS.pt[m - 1]}/${y}`, `${MONTHS.en[m - 1]} ${y}`);
+  };
+  const fmt = (n, lang) => n.toFixed(1).replace('.', lang === 'pt' ? ',' : '.');
+
+  /* Números do cabeçalho, calculados dos dados */
+  document.querySelectorAll('.js-projects').forEach(el => el.textContent = PROJECTS.length);
+  document.querySelectorAll('.js-rated').forEach(el => el.textContent = PROJECTS.filter(p => p.a != null).length);
+  document.querySelectorAll('.js-analyses').forEach(el => el.textContent = PROJECTS.reduce((t, p) => t + p.c, 0));
+
+  /* Destaques */
+  document.getElementById('feat-grid').innerHTML = FEATURED.map(f => `
+    <a class="feat-item" href="${f.u}" target="_blank" rel="noopener">
+      <div class="feat-head"><span class="chip">$${f.s}</span><span class="feat-source">Crowd.news</span></div>
+      <div class="feat-title">${both(esc(f.pt[0]), esc(f.en[0]))}</div>
+      <div class="feat-excerpt">${both(esc(f.pt[1]), esc(f.en[1]))}</div>
+      <div class="feat-date">${month(f.d)}</div>
+      <div class="feat-arrow">↗</div>
+    </a>`).join('');
+
+  /* Mapa mental */
+  document.getElementById('map-grid').innerHTML = BRANCHES.map((b, i) => `
+    <div class="branch">
+      <div class="branch-num">${String(i + 1).padStart(2, '0')}</div>
+      <div class="branch-title">${both(esc(b.pt), esc(b.en))}</div>
+      <ul>${b.items.map(([pt, en]) => `<li>${both(esc(pt), esc(en))}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  /* Filtros */
+  const filtersEl = document.getElementById('filters');
+  filtersEl.innerHTML = FILTERS.map(([k, pt, en]) =>
+    `<button class="filter${k === 'all' ? ' active' : ''}" type="button" data-f="${k}">${both(pt, en)}</button>`).join('');
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter');
+    if (!btn) return;
+    state.f = btn.dataset.f;
+    state.all = false;
+    filtersEl.querySelectorAll('.filter').forEach(b => b.classList.toggle('active', b === btn));
+    renderTable();
+  });
+  document.getElementById('search').addEventListener('input', e => {
+    state.q = e.target.value.trim().toLowerCase();
+    state.all = false;
+    renderTable();
+  });
+  document.getElementById('more').addEventListener('click', () => { state.all = !state.all; renderTable(); });
+
+  function renderTable() {
+    const lang = document.body.classList.contains('lang-pt') ? 'pt' : 'en';
+    const list = PROJECTS.filter(p =>
+      (state.f === 'all' || p.k.includes(state.f)) &&
+      (!state.q || p.n.toLowerCase().includes(state.q) || p.s.toLowerCase().includes(state.q)));
+    const shown = state.all ? list : list.slice(0, PAGE);
+
+    const head = `<div class="tr th">
+      <span>${both('Projeto', 'Project')}</span>
+      <span class="c-count">${both('Análises', 'Analyses')}</span>
+      <span class="c-score">${both('Nota média', 'Avg. score')}</span>
+      <span class="c-date">${both('Última', 'Latest')}</span>
+      <span class="c-link"></span>
+    </div>`;
+    const rows = shown.map(p => `<div class="tr">
+      <span><span class="p-name">${esc(p.n)}</span>${p.s ? `<span class="p-sym">$${esc(p.s)}</span>` : ''}</span>
+      <span class="c-count">${p.c}</span>
+      <span class="c-score">${p.a != null
+        ? `<span class="score"><span class="score-bar"><i style="width:${p.a / 5 * 100}%"></i></span><span class="score-num">${fmt(p.a, lang)}</span><span class="muted">/ 5</span></span>`
+        : `<span class="muted">${both('sem nota', 'not rated')}</span>`}</span>
+      <span class="c-date muted">${month(p.l)}</span>
+      <span class="c-link"><a class="row-link" href="${p.u}" target="_blank" rel="noopener">${both('Ver ↗', 'Read ↗')}</a></span>
+    </div>`).join('');
+    document.getElementById('table').innerHTML = head + (rows || `<div class="empty">${both('Nenhum projeto encontrado.', 'No projects found.')}</div>`);
+
+    document.getElementById('count').innerHTML = both(
+      `Mostrando ${shown.length} de ${list.length} projetos`,
+      `Showing ${shown.length} of ${list.length} projects`);
+    const more = document.getElementById('more');
+    more.style.display = list.length > PAGE ? '' : 'none';
+    more.innerHTML = state.all ? both('Mostrar menos', 'Show fewer') : both(`Mostrar todos (${list.length})`, `Show all (${list.length})`);
+  }
+
+  /* Idioma: mesmo sistema de taia.ma, lembrando a escolha entre páginas */
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('[data-ph-pt]').forEach(el => {
+      el.placeholder = lang === 'pt' ? el.dataset.phPt : el.dataset.phEn;
+    });
+    try { localStorage.setItem('taiama-lang', lang); } catch (e) {}
+    renderTable();
+  }
+
+  /* Tema claro/escuro (mesma chave de taia.ma, a escolha vale nas duas páginas) */
+  function toggleTheme() {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  }
+
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open')));
+
+  let savedLang = null;
+  try { savedLang = localStorage.getItem('taiama-lang'); } catch (e) {}
+  setLang(savedLang === 'pt' ? 'pt' : 'en');
+</script>
+</body>
+</html>
