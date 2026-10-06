@@ -24,6 +24,16 @@
   <!-- Favicon: "T" em serifa sobre o azul da marca -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A1628'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' fill='%23fff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
 
+  <!-- Tema: aplica antes de renderizar (escolha salva > preferência do sistema) -->
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
@@ -43,6 +53,8 @@
       --border: #E5E7EB;
       --surface: #F9FAFB;
       --white: #FFFFFF;
+      --bg: #FFFFFF;
+      --card: #FFFFFF;
       --radius: 8px;
       --font-sans: 'Inter', system-ui, sans-serif;
       --font-serif: 'Playfair Display', Georgia, serif;
@@ -961,6 +973,69 @@
       color: var(--text-secondary);
       margin-bottom: 0.25rem;
     }
+
+    /* ── TEMA CLARO / ESCURO ── */
+    .theme-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .theme-btn .icon-sun { display: none; }
+    [data-theme="dark"] .theme-btn .icon-sun { display: inline; }
+    [data-theme="dark"] .theme-btn .icon-moon { display: none; }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --accent: #3B82F6;
+      --accent-light: rgba(59,130,246,0.14);
+      --text: #E5E7EB;
+      --text-secondary: #A3ADBD;
+      --text-muted: #6B7689;
+      --border: #22324F;
+      --surface: #0D1A2F;
+      --bg: #08111F;
+      --card: #10203A;
+    }
+
+    [data-theme="dark"] body,
+    [data-theme="dark"] #services,
+    [data-theme="dark"] #publications { background: var(--bg); }
+
+    [data-theme="dark"] nav { background: rgba(8,17,31,0.92); }
+
+    [data-theme="dark"] .nav-logo,
+    [data-theme="dark"] .section-title,
+    [data-theme="dark"] .service-title,
+    [data-theme="dark"] .report-title,
+    [data-theme="dark"] .pub-title,
+    [data-theme="dark"] .pub-nav { color: var(--text); }
+
+    [data-theme="dark"] .nav-links a:hover { color: var(--white); }
+    [data-theme="dark"] .lang-btn.active { background: var(--accent); }
+    [data-theme="dark"] .hamburger span { background: var(--text); }
+
+    [data-theme="dark"] .about-badge,
+    [data-theme="dark"] .service-card,
+    [data-theme="dark"] .report-card,
+    [data-theme="dark"] .pub-item,
+    [data-theme="dark"] .pub-nav { background: var(--card); }
+
+    [data-theme="dark"] .service-card.featured {
+      background: var(--navy-light);
+      border-color: var(--navy-light);
+    }
+    [data-theme="dark"] .service-card.featured .service-title { color: var(--white); }
+
+    [data-theme="dark"] .tag { border-color: rgba(59,130,246,0.35); }
+    [data-theme="dark"] #contact { border-top: 1px solid var(--border); }
   </style>
 </head>
 <body class="lang-en">
@@ -982,6 +1057,9 @@
       <button class="lang-btn" onclick="setLang('pt')">PT</button>
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
     </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Light / dark mode" title="Light / dark mode">
+      <span class="icon-moon">☾</span><span class="icon-sun">☀</span>
+    </button>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -1677,11 +1755,17 @@
 
   setLang('en');
 
+  function toggleTheme() {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  }
+
   function toggleMenu() {
     const links = document.querySelector('.nav-links');
     if (!links) return;
     const isOpen = links.style.display === 'flex';
-    links.style.cssText = isOpen ? '' : 'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;padding:1rem 5vw 2rem;border-bottom:1px solid #E5E7EB;gap:1rem;z-index:99;';
+    links.style.cssText = isOpen ? '' : 'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--bg);padding:1rem 5vw 2rem;border-bottom:1px solid var(--border);gap:1rem;z-index:99;';
   }
 
   async function submitForm(e) {
